@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Gk.BookStore/1.0.0": {
+        "runtime": {
+          "Gk.BookStore.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Gk.BookStore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
