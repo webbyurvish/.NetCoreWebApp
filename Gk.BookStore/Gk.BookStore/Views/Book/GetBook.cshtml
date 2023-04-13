@@ -1,7 +1,8 @@
-﻿@using Gk.BookStore.Models
+﻿@{
+    ViewData["Title"] = "Book Detail " + Model.Title; 
+}
+
 @model BookModel
-
-
 
 <div class="container">
     <h3 class="display-4">Book details</h3>
