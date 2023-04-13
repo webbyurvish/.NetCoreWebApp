@@ -14,14 +14,14 @@ namespace Gk.BookStore.Controllers
         public ViewResult GetAllBooks()
         {
             var data = _bookRepository.GetAllBooks();
-            return View();
+            return View(data);
         }
 
-        public ViewResult GetBook(int id)
+        public IActionResult GetBook(int id)
         {
-            var data = _bookRepository.GetBookId(id);
+            var data = _bookRepository.GetBookById(id);
 
-            return View();
+            return View(data);
         }
 
         public ViewResult SearchBooks(string bookName , string authorName)
