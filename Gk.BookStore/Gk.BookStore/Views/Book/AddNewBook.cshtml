@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add new book";
+}
+@inject Gk.BookStore.Repository.ILanguageRepository _languageRepository
+@model BookModel
+
+<div class="container">
+    <h3 class="display-4">Add new book</h3>
+    <hr/>
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations!!!</strong> You have successfully added new book in the list <br/>
+            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the details
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    
+    <form method="post" enctype="multipart/form-data"  asp-action="AddNewBook" asp-controller="Book">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="LanguageId" class="control-label"></label>
+
+            @* by using hardcoded value
+            <select asp-for="Language" class="form-control">
+                <option value="">Please choose book language</option>
+                <option value="Hindi">Hindi (One of the best language) </option>
+                <option>English (Global language)</option>
+                <option>Dutch (My custom message)</option>
+            </select>*@
+
+            @*by using selectlist*@
+            <select asp-for="LanguageId" class="form-control" asp-items="(await _languageRepository.GetLanguages()).Select(x => new SelectListItem(){ Text = x.Name ,Value = x.Id.ToString() })">
+                <option value="">Please choose your language</option>
+            </select>
+
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Author" class="control-label"></label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPages" class="control-label"></label>
+            <input asp-for="TotalPages" class="form-control" />
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CoverPhoto" class="control-label"></label>
+                <div class="custom-file">
+                    <input class="custom-file-input" asp-for="CoverPhoto" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>  
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GalleryFiles" class="control-label"></label>
+            <div class="custom-file">
+                <input class="custom-file-input" asp-for="GalleryFiles" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BookPdf" class="control-label"></label>
+            <div class="custom-file">
+                <input class="custom-file-input" asp-for="BookPdf" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="BookPdf" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add Book" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@*@section scripts {
+    <script>
+        function myComplete(){
+            alert("I am from complete")
+        }
+
+        function mySuccess() {
+            alert("I am from Success")
+        }
+        function myFailure() {
+            alert("I am from failure")
+        }
+    </script>
+}*@
