@@ -33,7 +33,6 @@ namespace Gk.BookStore.Models
         [RequiredAttribute(ErrorMessage ="Please choose the language ")]
         public int LanguageId { get; set; }
 
-
         public string? Language { get; set; }
 
         [Required(ErrorMessage = "Please Enter the totalPages")]
